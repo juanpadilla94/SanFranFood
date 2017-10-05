@@ -11,11 +11,6 @@ public class RestaurantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
-        // name
-        TextView resNameText = (TextView) findViewById(R.id.res_name_text);
-        resNameText.setText(getIntent().getStringExtra("name"));
-        resNameText.setTextColor(Color.parseColor("#ffffff"));
-        resNameText.setBackgroundColor(Color.parseColor("#4272b7"));
         // address
         TextView resAddressText = (TextView) findViewById(R.id.res_address_text);
         resAddressText.setText(getIntent().getStringExtra("address"));

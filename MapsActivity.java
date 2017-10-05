@@ -42,32 +42,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // COORD - SF: 37.76, -122.43
-        try {
-            ArrayList<Restaurant> restList = new Model().generateData();
-            for(Restaurant rest : restList) {
-                mMap = googleMap;
-                LatLng coordinates = new LatLng(rest.getLat(), rest.getLng());
-                mMap.addMarker(new MarkerOptions().position(coordinates).title(rest.getName()));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates));
-                // ON CLICK
-                final String name = rest.getName();
-                final String rating = rest.getRating();
-                final String address = rest.getAddress();
-
-                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                        Intent intent = new Intent(MapsActivity.this, RestaurantActivity.class);
-                        intent.putExtra("name", name);
-                        intent.putExtra("rating", rating);
-                        intent.putExtra("address", address);
-                        startActivity(intent);
-                    }
-                });
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //ArrayList<Restaurant> restList = new Model().generateData();
+        Model m = new Model();
+        m.generateData();
+        ArrayList<Restaurant> restList = m.getRestList();
+        mMap = googleMap;
+        for(Restaurant rest : restList) {
+            LatLng coordinates = new LatLng(rest.getLat(), rest.getLng());
+            mMap.addMarker(new MarkerOptions().position(coordinates).title(rest.getName()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates));
+            final String name = rest.getName();
+            final String rating = rest.getRating();
+            final String address = rest.getAddress();
+            // ON CLICK
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Intent intent = new Intent(MapsActivity.this, RestaurantActivity.class);
+                    intent.putExtra("rating", rating);
+                    intent.putExtra("address", address);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
