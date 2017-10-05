@@ -43,6 +43,11 @@ public class Model {
                 double lat = location.getDouble("lat");
                 double lng = location.getDouble("lng");
                 rest.setCoord(lat, lng);
+                // location
+                String address = result.getString("vicinity");
+                String rating = result.getString("rating");
+                rest.setRating(rating);
+                rest.setAddress(address);
                 restList.add(rest);
             }
         } catch (JSONException e) {

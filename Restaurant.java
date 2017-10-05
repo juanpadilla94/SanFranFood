@@ -12,6 +12,10 @@ public class Restaurant {
     // restaurant name (may not be unique)
     private String name;
 
+    private String rating;
+
+    private String address;
+
     // latitude
     private double lat;
 
@@ -41,9 +45,29 @@ public class Restaurant {
     public double getLng(){
         return lng;
     }
+
+    public String getRating() {
+        if(rating == null) return "N/A";
+        return rating;
+    }
+
+    public String getAddress() {
+        if(address == null) return "N/A";
+        return address;
+    }
+
     // SETTERS
+
     public void setCoord(double lat, double lng) {
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
